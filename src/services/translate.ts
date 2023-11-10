@@ -1,13 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+"use server";
 import OpenAI from "openai";
+
 const openai = new OpenAI({
-    apiKey: process.env.OPEN_AI_KEY, // defaults to process.env["OPENAI_API_KEY"]
+    apiKey: process.env.OPEN_AI_KEY,
 });
 
-
-export async function POST(request: NextRequest) {
-    const { text, srcLang, tgtLang } = await request.json();
-    // const response = NextResponse.json;
+async function translateText(text: string, srcLang: string, tgtLang: string) {
     const chatCompletion = await openai.chat.completions.create({
         messages: [
             {
@@ -20,5 +18,7 @@ export async function POST(request: NextRequest) {
     });
 
     const result = chatCompletion.choices[0]['message']['content'] || ''
-    return NextResponse.json({ result });
+    return result;
 }
+
+export default translateText;
