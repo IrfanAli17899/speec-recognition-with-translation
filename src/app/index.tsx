@@ -9,8 +9,8 @@ import languagesJson from "@src/app/languages.json";
 const languages = Object.entries(languagesJson);
 
 const SpeechRecognitionComponent = () => {
-  const [srcLang, setSrcLang] = useState("ur-PK");
-  const [tgtLang, setTgtLang] = useState("en-US");
+  const [srcLang, setSrcLang] = useState("en-US");
+  const [tgtLang, setTgtLang] = useState("ko-KR");
 
   const {
     transcript,
@@ -24,9 +24,6 @@ const SpeechRecognitionComponent = () => {
     text: transcript,
     srcLang,
     tgtLang,
-    // onDone: () => {
-    //   setTranslatedInterim("");
-    // },
   });
 
   const [interimTranslatedText, setTranslatedInterim] = useSpeechTranslation({
